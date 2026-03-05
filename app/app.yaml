@@ -1,0 +1,23 @@
+# EHR Clinical Explorer – Databricks App
+#
+# In the Apps UI (Configure → Add resource), bind:
+#   - genie-space  → Genie space named "build-con-mp"
+#   - sql-warehouse → SQL warehouse with id e9b34f7a2e4b0561
+# These keys are referenced below via valueFrom (do not hardcode IDs here).
+
+command:
+  - "streamlit"
+  - "run"
+  - "app.py"
+  - "--server.port=8000"
+  - "--server.address=0.0.0.0"
+  - "--server.headless=true"
+
+env:
+  - name: GENIE_SPACE_ID
+    valueFrom: genie-space
+  - name: DATABRICKS_WAREHOUSE_ID
+    valueFrom: sql-warehouse
+  # Dashboard URL (AI/BI dashboard); use Share → Embed for an embed-specific URL if needed
+  - name: DASHBOARD_EMBED_URL
+    value: "https://e2-demo-field-eng.cloud.databricks.com/sql/dashboardsv3/01f118ce98d61261aa6e5e6afe3086fb/pages/0920a246?o=1444828305810485"
