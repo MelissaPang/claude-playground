@@ -10,7 +10,7 @@ You need a Git repo that contains **only** the `claude-playground` project (not 
 
 ### Step 1a: Create a new repo on GitHub (or GitLab / Bitbucket)
 
-1. Go to [GitHub](https://github.com/new) (or your host).
+1. Go to [GitHub](https://github.com/MelissaPang) (or your host).
 2. Create a new repository, e.g. **claude-playground**.
 3. Do **not** initialize with a README (you already have files).
 4. Copy the repo URL, e.g. `https://github.com/YOUR_USERNAME/claude-playground.git`.
@@ -36,6 +36,12 @@ git push -u origin main
 
 Replace `YOUR_USERNAME` and the URL with your actual repo URL. Use `git remote add origin <url>` for GitLab/Bitbucket/Azure Repos the same way.
 
+**If you already ran `git remote add origin` with the placeholder URL**, fix it with:
+```bash
+git remote set-url origin https://github.com/YOUR_USERNAME/claude-playground.git
+```
+(Replace `YOUR_USERNAME` with your GitHub username, then run `git push -u origin main`.)
+
 **If this folder is already its own Git repo** and you only need to add the remote and push:
 
 ```bash
@@ -60,7 +66,7 @@ The project root has a `.gitignore` so `.venv`, `__pycache__`, and `.ipynb_check
 1. In Databricks: go to **Repos** (left sidebar or **Workspace → Repos**).
 2. Click **Add Repo** (or **Create repo**).
 3. Choose **Clone from URL** (or connect your Git provider first under **Settings → Git integration**).
-4. **Git repository URL:** your repo URL, e.g. `https://github.com/YOUR_ORG/claude-playground.git`.
+4. **Git repository URL:** your repo URL, e.g. `https://github.com/MelissaPang/claude-playground.git`.
 5. **Repo name:** e.g. `claude-playground` (can match the project name).
 6. **Path (optional):** leave default so the repo is at `/Repos/<your-user>/claude-playground`.
 7. Create the repo. Databricks will clone the repo; your notebooks (e.g. `3.unify_ehr_data.ipynb`) will appear under that path.
