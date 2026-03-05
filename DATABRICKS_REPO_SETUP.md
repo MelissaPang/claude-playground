@@ -2,6 +2,8 @@
 
 Use **Databricks Repos** so the same code lives in Cursor and in the Databricks workspace. Push from Cursor → Git → pull in Databricks; then jobs can run the notebooks from the repo path.
 
+**Note:** The **EHR Clinical Explorer** app (`app/`) is deployed separately via **Databricks Apps** (upload + deploy from CLI or UI). See **`app/README.md`** for app deployment. Repos are used for the notebooks and the **unify_ehr_data** job, not for the app runtime.
+
 ---
 
 ## 1. Push this project to a Git remote

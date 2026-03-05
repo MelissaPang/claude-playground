@@ -1,10 +1,26 @@
-from databricks.connect import DatabricksSession
+"""Create catalog and schema in the target workspace using the Databricks SDK (no cluster required)."""
+from databricks.sdk import WorkspaceClient
+from databricks.sdk.errors.platform import NotFound, ResourceDoesNotExist
 
 CATALOG = "melissap"
 SCHEMA = "melissa_pang"
+PROFILE = "tko"
 
-# Use the Databricks CLI profile you configured (see next step)
-spark = DatabricksSession.builder.profile("DEFAULT").getOrCreate()
+w = WorkspaceClient(profile=PROFILE)
+print(f"Workspace: {w.config.host}")
 
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-print(f"Created schema {CATALOG}.{SCHEMA} (if it did not already exist).")
+# Create catalog if it doesn't exist (requires UC privileges)
+try:
+    w.catalogs.get(CATALOG)
+    print(f"Catalog {CATALOG} already exists.")
+except (ResourceDoesNotExist, NotFound):
+    w.catalogs.create(name=CATALOG)
+    print(f"Created catalog {CATALOG}.")
+
+# Create schema if it doesn't exist
+try:
+    w.schemas.get(f"{CATALOG}.{SCHEMA}")
+    print(f"Schema {CATALOG}.{SCHEMA} already exists.")
+except (ResourceDoesNotExist, NotFound):
+    w.schemas.create(name=SCHEMA, catalog_name=CATALOG)
+    print(f"Created schema {CATALOG}.{SCHEMA}.")

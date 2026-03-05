@@ -4,30 +4,46 @@ This project uses the following workspace:
 
 **https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com**
 
-## Configure your environment
+The **EHR Clinical Explorer** app is deployed to this workspace (profile **tko**). Use the same profile for CLI deploy and for running notebooks that target this workspace.
 
-### Option 1: Databricks CLI / SDK (profile DEFAULT)
+## Profiles
 
-Point the `DEFAULT` profile in `~/.databrickscfg` to this workspace:
+Use the **tko** profile to target this workspace (OAuth, no token).
+
+### 1. Add the tko profile
+
+Edit `~/.databrickscfg` and add:
 
 ```ini
-[DEFAULT]
+[tko]
 host = https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com
-token = <your-personal-access-token>
+# Use serverless compute so you don't need a cluster_id
+serverless_compute_id = auto
 ```
 
-Or use environment variables:
+Do **not** add a `token` line; authentication uses OAuth.
+
+**Skipping cluster:** With `serverless_compute_id = auto`, Databricks Connect uses serverless compute and you do **not** need to set `cluster_id`. If you prefer a cluster instead, omit `serverless_compute_id` and set `cluster_id = <your-cluster-id>`.
+
+### 2. Log in with OAuth
 
 ```bash
-export DATABRICKS_HOST=https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com
-export DATABRICKS_TOKEN=<your-token>
+databricks auth login --profile tko
 ```
 
-### Option 2: Copy the example config
+A browser window opens. Sign in to the workspace; the CLI stores OAuth credentials locally.
+
+### 3. Verify
 
 ```bash
-cp .databrickscfg.example ~/.databrickscfg
-# Edit ~/.databrickscfg and add your token.
+databricks auth token --profile tko
 ```
 
-All notebooks and the app use `profile="DEFAULT"` or `Config()`, so they will use this workspace once configured.
+If this returns a token, the tko profile is set and authenticated.
+
+### Using the tko profile in code
+
+- **CLI:** `databricks ... --profile tko`
+- **Python (SDK / Connect):** `WorkspaceClient(profile="tko")` or `DatabricksSession.builder.profile("tko").getOrCreate()`
+
+To use this workspace by default, point `[DEFAULT]` at the same host or set `DATABRICKS_CONFIG_PROFILE=tko`. The example config (`.databrickscfg.example`) includes both DEFAULT and tko.

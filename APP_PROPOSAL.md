@@ -120,12 +120,14 @@ Optional:
 
 ---
 
-## 7. Implemented: Streamlit + Genie embed
+## 7. Implemented: Streamlit + Genie Conversation API + in-app Dashboard
 
 The app is implemented in the **`app/`** directory:
 
-- **Streamlit** with two views: **Ask Genie** (embedded iframe to Genie space) and **Dashboard** (iframe when `DASHBOARD_EMBED_URL` is set).
-- **app.yaml** wires resources: `genie-space` → `GENIE_SPACE_ID`, `sql-warehouse` → `DATABRICKS_WAREHOUSE_ID`; optional `DASHBOARD_EMBED_URL` for the dashboard tab.
-- Genie embed URL: `https://<workspace>/genie/rooms/<space_id>`. If the iframe is blocked, users can click **Open Genie in new tab** in the sidebar.
+- **Streamlit** with two tabs: **Ask Genie** and **Dashboard**.
+- **Ask Genie**: In-app chat using the [Genie Conversation API](https://docs.databricks.com/genie/conversation-api.html). Users type questions; the app calls `start_conversation` / `create_message` and displays Genie's text and SQL in the same page. No iframe. Sidebar: **Open Genie in new tab** (full Genie UI), **New conversation** (reset thread).
+- **Dashboard**: In-app metrics and bar charts by running SQL on the app warehouse via the Statement Execution API (patient count, imaging studies, clinical notes; diagnosis breakdown, stage breakdown, images by modality). No iframe. If `DASHBOARD_EMBED_URL` is set, a link at the bottom opens the full Databricks AI/BI dashboard in a new tab.
+- **app.yaml** uses `valueFrom`: `genie-space` → `GENIE_SPACE_ID`, `sql-warehouse` → `DATABRICKS_WAREHOUSE_ID`. Optional env `DASHBOARD_EMBED_URL` for the full-dashboard link.
+- The app's **service principal** needs **USE CATALOG** / **USE SCHEMA** / **SELECT** on `melissap.melissa_pang` (ehr, lung_cancer_images, parsed_clinical_notes) for the Dashboard tab to show data. Find the principal in the app's **Configure** → **Authorization** tab.
 
-See **`app/README.md`** for run order, resource setup, and deployment.
+See **`app/README.md`** for deploy steps, resource setup, permissions, and troubleshooting (e.g. dashboard not showing data).

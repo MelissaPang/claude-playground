@@ -1,4 +1,5 @@
 # EHR Clinical Explorer – Databricks App
+# Deploy to the workspace in profile "tko"; Genie space build-con-mp must be in that same workspace.
 #
 # In the Apps UI (Configure → Add resource), bind:
 #   - genie-space  → Genie space named "build-con-mp"
@@ -14,11 +15,13 @@ command:
   - "--server.headless=true"
 
 env:
+  # Genie space: bind resource "genie-space" to build-con-mp in Apps UI so the correct space ID is injected.
   - name: GENIE_SPACE_ID
     valueFrom: genie-space
+  # SQL warehouse: bind resource "sql-warehouse" in Apps UI so the app gets the warehouse ID and "Can use" permission (required for Dashboard data).
   - name: DATABRICKS_WAREHOUSE_ID
     valueFrom: sql-warehouse
   # Dashboard URL (AI/BI dashboard on project workspace); set in Apps UI or here after publishing a dashboard
   # Workspace: https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com
   - name: DASHBOARD_EMBED_URL
-    value: ""
+    value: "https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com/dashboardsv3/01f118e23e341466b577e2f3d7097536/published/pages/5a2d82e0?o=7474649442851266"

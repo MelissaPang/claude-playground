@@ -1,6 +1,11 @@
-# Copy to ~/.databrickscfg and set your token.
+# Copy to ~/.databrickscfg. Use OAuth (no token):
+#   databricks auth login --profile tko
 # Project workspace: https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com
 
 [DEFAULT]
 host = https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com
-token = <your-personal-access-token>
+
+[tko]
+host = https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com
+# Use serverless compute (no cluster required). Omit cluster_id.
+serverless_compute_id = auto
