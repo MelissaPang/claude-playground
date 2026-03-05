@@ -1,0 +1,20 @@
+# The main pipeline for e2_demo_field_eng
+
+resources:
+  pipelines:
+    e2_demo_field_eng_etl:
+      name: e2_demo_field_eng_etl
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      root_path: "../src/e2_demo_field_eng_etl"
+
+      libraries:
+        - glob:
+            include: ../src/e2_demo_field_eng_etl/transformations/**
+
+      environment:
+        dependencies:
+          # We include every dependency defined by pyproject.toml by defining an editable environment
+          # that points to the folder where pyproject.toml is deployed.
+          - --editable ${workspace.file_path}

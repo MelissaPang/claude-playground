@@ -1,0 +1,20 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Jupyter / notebooks
+.ipynb_checkpoints/
+
+# Local / IDE
+.DS_Store
+*.swp
+.idea/
+
+# Optional: keep synthetic data out of git if you generate locally
+# synthetic_clinical_data/
