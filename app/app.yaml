@@ -18,6 +18,7 @@ env:
     valueFrom: genie-space
   - name: DATABRICKS_WAREHOUSE_ID
     valueFrom: sql-warehouse
-  # Dashboard URL (AI/BI dashboard); use Share → Embed for an embed-specific URL if needed
+  # Dashboard URL (AI/BI dashboard on project workspace); set in Apps UI or here after publishing a dashboard
+  # Workspace: https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com
   - name: DASHBOARD_EMBED_URL
-    value: "https://e2-demo-field-eng.cloud.databricks.com/sql/dashboardsv3/01f118ce98d61261aa6e5e6afe3086fb/pages/0920a246?o=1444828305810485"
+    value: ""

@@ -11,7 +11,8 @@ from databricks.sdk.core import Config
 LOCAL_DEFAULT_WAREHOUSE_ID = "e9b34f7a2e4b0561"
 GENIE_SPACE_NAME = "build-con-mp"  # Used in UI messages; actual GENIE_SPACE_ID comes from app resource or env.
 # Default dashboard URL (overridden by env DASHBOARD_EMBED_URL when set in app.yaml or Apps UI).
-DEFAULT_DASHBOARD_URL = "https://e2-demo-field-eng.cloud.databricks.com/sql/dashboardsv3/01f118ce98d61261aa6e5e6afe3086fb/pages/0920a246?o=1444828305810485"
+# Project workspace: https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com — set a dashboard URL from that workspace.
+DEFAULT_DASHBOARD_URL = ""
 
 # Must be first Streamlit command
 st.set_page_config(

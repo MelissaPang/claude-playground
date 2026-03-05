@@ -16,5 +16,8 @@ build/
 *.swp
 .idea/
 
+# Databricks (do not commit tokens)
+.databrickscfg
+
 # Optional: keep synthetic data out of git if you generate locally
 # synthetic_clinical_data/

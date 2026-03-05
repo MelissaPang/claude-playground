@@ -17,6 +17,8 @@ Databricks-backed EHR (Electronic Health Records) demo: synthetic clinical data 
 
 | Path | Purpose |
 |------|--------|
+| `WORKSPACE.md` | Documents project workspace (fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com) and how to configure `DEFAULT` profile. |
+| `.databrickscfg.example` | Example `~/.databrickscfg` with project workspace host; copy and add token. |
 | `create_schema.py` | Ensures catalog `melissap` and schema `melissa_pang` exist. Uses DatabricksSession with profile `DEFAULT`. |
 | `1.setup_volume_and_genie.ipynb` | Creates UC volume `melissap.melissa_pang.project_volume`, ensures `clinical_notes` subfolder, and Genie space **build-con-mp** (title). Uses Databricks SDK (`WorkspaceClient(profile="DEFAULT")`). Optional: set `WAREHOUSE_ID`; tables can be added later via notebook 4. |
 | `2.generate_synthetic_clinical_data.ipynb` | Generates synthetic clinical data: 100 PDF clinical notes in `project_volume/clinical_notes/`, one JSON (`lung_cancer_images_metadata.json`) and one CSV (`ehr.csv`) in the volume root. 35 patients with shared `patient_id` (e.g. `PAT_001`). Uses Faker, fpdf2, pandas; uploads via `w.files.upload()` with `io.BytesIO()` for contents. |
@@ -28,6 +30,7 @@ Databricks-backed EHR (Electronic Health Records) demo: synthetic clinical data 
 
 ## Conventions
 
+- **Workspace:** **https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com** — Configure `DEFAULT` in `~/.databrickscfg` or set `DATABRICKS_HOST` / `DATABRICKS_TOKEN`. See `WORKSPACE.md` and `.databrickscfg.example`.
 - **Databricks auth:** Scripts use `profile="DEFAULT"` (e.g. `WorkspaceClient(profile="DEFAULT")`, `DatabricksSession.builder.profile("DEFAULT")`). Align new code with this unless the user asks otherwise.
 - **Catalog/schema:** Use `melissap` / `melissa_pang` for tables and volumes in this project.
 - **Volume paths:** Base volume path is `/Volumes/melissap/melissa_pang/project_volume`; PDFs live under `.../project_volume/clinical_notes/`.

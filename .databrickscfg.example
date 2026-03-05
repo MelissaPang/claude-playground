@@ -1,0 +1,6 @@
+# Copy to ~/.databrickscfg and set your token.
+# Project workspace: https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com
+
+[DEFAULT]
+host = https://fe-sandbox-serverless-sandbox-x7ar8s.cloud.databricks.com
+token = <your-personal-access-token>
